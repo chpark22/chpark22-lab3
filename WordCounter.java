@@ -27,7 +27,7 @@ public class WordCounter {
         
                 if (count < 5) {
                         count++;
-                        throw new TooSmallText("Only found "+count+" words.");
+                        throw new TooSmallText("Only found " + count + " words.");
                 }
         
                 return count;
@@ -43,8 +43,8 @@ public class WordCounter {
                         }
                 }       
                 catch (IOException e) {
-                        System.out.println("error: " + e.getMessage());
-                        System.out.print("re_enter a file: ");
+                        System.out.println("Error: " + e.getMessage());
+                        System.out.print("Re-enter a valid file path: ");
                         Scanner scanner = new Scanner(System.in);
                         String re_way = scanner.nextLine();
                         scanner.close();
@@ -55,7 +55,7 @@ public class WordCounter {
                         throw new EmptyFileException(way + " was empty");
                 }
             
-                return new StringBuffer(l.toString());
+                return new StringBuffer(l.toString().trim());
                 }
             
                 public static void main(String[] args) {
@@ -80,21 +80,21 @@ public class WordCounter {
                                         String file = scanner.nextLine();
                                         StringBuffer filecontent = processFile(file);
                                         int wordCount = processText(filecontent, stopword);
-                                        System.out.println("Word count: " + wordCount);
+                                        System.out.println("Found " + wordCount + " words.");
                                 } if (option == 2) {
                                         System.out.print("Enter the text: ");
                                         text = scanner.nextLine();
                                         int wordCount = processText(new StringBuffer(text), stopword);
-                                        System.out.println("Word count: " + wordCount);
+                                        System.out.println("Found " + wordCount + " words.");
                                 }
 
                         } catch (InvalidStopwordException e) {
                                 System.out.println(e.getMessage());
                                 System.out.println("Enter a new stopword: ");
-                                String newStopword = scanner.nextLine();
+                                stopword = scanner.nextLine();
                                 try {
-                                        int wordCount = processText(new StringBuffer(text), newStopword);
-                                        System.out.println("Word count: " + wordCount);
+                                        int wordCount = processText(new StringBuffer(text), stopword);
+                                        System.out.println("Found " + wordCount + " words.");
                                 } catch (InvalidStopwordException h) {
                                         System.out.println(h.getMessage());
                                 } catch (TooSmallText o) {
